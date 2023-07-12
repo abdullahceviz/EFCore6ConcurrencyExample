@@ -1,7 +1,14 @@
+using ConcurrencyExample.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); 
+builder.Services.AddDbContext<MssqlDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
+});
 
 var app = builder.Build();
 
